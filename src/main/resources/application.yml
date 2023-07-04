@@ -1,0 +1,13 @@
+
+spring:
+  datasource:  # 配置postgresql
+    driver-class-name: com.postgresql.cj.jdbc.Driver
+    url: jdbc:postgresql://123.249.102.245:26000/mydb?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+    username: palewave
+    password: MyDB@123
+    
+server:
+  port: 26000  # 默认端口
+  
+mybatis:
+  mapper-locations: classpath:mapper/*.xml 
