@@ -1,0 +1,127 @@
+class的工号是干啥的
+class times,firstremain,票价的计算
+
+@Controller
+@RequestMapping("/stations")
+public class StationsController {
+@Autowired
+private IfStationsService ifStationsService;
+
+@Autowired
+private StopoverStationsService stopoverStationsService;
+
+@GetMapping("/route/{routeId}")
+public ResponseEntity<List<IfStations>> getStationsByRouteId(@PathVariable("routeId") int routeId) {
+List<IfStations> stations = ifStationsService.findByRouteId(routeId);
+return ResponseEntity.ok(stations);
+}
+
+@PostMapping("/if-stations")
+public ResponseEntity<Void> createIfStations(@RequestBody IfStations ifStations) {
+ifStationsService.insert(ifStations);
+return ResponseEntity.ok().build();
+}
+
+@PutMapping("/if-stations/{routeId}")
+public ResponseEntity<Void> updateIfStations(@PathVariable("routeId") int routeId, @RequestBody IfStations ifStations) {
+ifStations.setRouteId(routeId);
+ifStationsService.update(ifStations);
+return ResponseEntity.ok().build();
+}
+
+@DeleteMapping("/if-stations/{routeId}")
+public ResponseEntity<Void> deleteIfStations(@PathVariable("routeId") int routeId) {
+ifStationsService.delete(routeId);
+return ResponseEntity.ok().build();
+}
+
+@PostMapping("/stopover-stations")
+public ResponseEntity<Void> createStopoverStations(@RequestBody StopoverStations stopoverStations) {
+stopoverStationsService.insert(stopoverStations);
+return ResponseEntity.ok().build();
+}
+
+@PutMapping("/stopover-stations/{routeId}")
+public ResponseEntity<Void> updateStopoverStations(@PathVariable("routeId") int routeId, @RequestBody StopoverStations stopoverStations) {
+stopoverStations.setRouteId(routeId);
+stopoverStationsService.update(stopoverStations);
+return ResponseEntity.ok().build();
+}
+
+@DeleteMapping("/stopover-stations/{id}/{number}")
+public ResponseEntity<Void> deleteStopoverStations(@PathVariable("id") int id, @PathVariable("number") String number) {
+stopoverStationsService.delete(id, number);
+return ResponseEntity.ok().build();
+}
+
+@GetMapping("/stopover-stations/{routeId}")
+public ResponseEntity<StopoverStations> getStopoverStationsByRouteId(@PathVariable("routeId") int routeId) {
+StopoverStations stopoverStations = stopoverStationsService.findByrouteId(routeId);
+return ResponseEntity.ok(stopoverStations);
+}
+
+@GetMapping("/stopover-stations/all")
+public ResponseEntity<List<StopoverStations>> getAllStopoverStations() {
+List<StopoverStations> stopoverStations = stopoverStationsService.findAll();
+return ResponseEntity.ok(stopoverStations);
+}
+}
+
+    // /*
+    //  * 根据出发点和下车点查找路线
+    // */
+    // public List<Station> findRoute(String begin,String end);
+    //  * 路线增加站点
+    //  */
+    // public bool addStationOfRoute(int routeId,List<StopOverStations> SOStations);
+    // /*
+    //  * 路线删除站点
+    //  */
+    // public bool deleteStationOfRoute(int routeId,List<StopOverStations> SOStations);
+    // /*
+    //  * 添加站点
+    //  */
+    // /*
+    //  * 删除站点
+    //  */
+    // /*
+    //  * 计算票价
+    //  */
+
+
+    // // Create or Update IfStations
+    // public void saveIfStations(IfStations ifStations);
+
+    // // Delete IfStations by routeId
+    // public void deleteIfStations(int routeId);
+
+    // // Get IfStations by routeId
+    // public IfStations getIfStations(int routeId);
+
+    // // Get all IfStations
+    // public List<IfStations> getAllIfStations();
+    // // Create or Update StopoverStations
+    // public void saveStopoverStations(StopoverStations stopoverStations) {
+    //     if (stopoverStations.getRouteId() != 0 && stopoverStations.getLength() > 0 &&
+    //         stopoverStations.getStationName() != null &&
+    //         stopoverStations.getArriveTime() != null && stopoverStations.getDepartureTime() != null) {
+    //         stopoverStationsMapper.save(stopoverStations);
+    //     } else {
+    //         throw new IllegalArgumentException("Invalid StopoverStations data provided.");
+    //     }
+    // }
+
+    // // Delete StopoverStations by routeId
+    // public void deleteStopoverStations(int routeId) {
+    //     stopoverStationsMapper.delete(routeId);
+    // }
+
+    // // Get StopoverStations by routeId
+    // public StopoverStations getStopoverStations(int routeId) {
+    //     return stopoverStationsMapper.get(routeId);
+    // }
+
+    // // Get all StopoverStations
+    // public List<StopoverStations> getAllStopoverStations() {
+    //     return stopoverStationsMapper.getAll();
+    // }

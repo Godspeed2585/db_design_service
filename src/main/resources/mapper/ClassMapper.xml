@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.warehouse.mapper.ClassMapper">
+
+    <!-- 根据wagonId查询信息 -->
+    <select id="findByWagonId" resultType="Class">
+        SELECT * FROM "TicketManagement".class WHERE wagonId = #{wagonId}
+    </select>
+
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="Class">
+        INSERT INTO "TicketManagement".class (license, times, routeId, basicPrice, firstWeight, secondWeight, discountWeight, wagonId)
+        VALUES (#{license}, #{times}, #{routeId}, #{basicPrice}, #{firstWeight}, #{secondWeight}, #{discountWeight}, #{wagonId})
+    </insert>
+
+    <!-- 更新信息 -->
+    <update id="update" parameterType="Class">
+        UPDATE "TicketManagement".class SET license = #{license}, times = #{times}, routeId = #{routeId}, basicPrice = #{basicPrice},
+        firstWeight = #{firstWeight}, secondWeight = #{secondWeight}, discountWeight = #{discountWeight},
+        wagonId = #{wagonId}
+        WHERE jobId = #{jobId}
+    </update>
+
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM "TicketManagement".class WHERE jobId = #{jobId}
+    </delete>
+
+</mapper>
