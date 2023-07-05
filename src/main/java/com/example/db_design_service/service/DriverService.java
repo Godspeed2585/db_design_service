@@ -1,9 +1,9 @@
 package com.example.db_design_service.service;
-import com.example.db_design_service.bean.Driver;
-import com.example.db_design_service.bean.User;
-import com.example.db_design_service.bean.UserLogin;
+
+import com.example.db_design_service.bean.DriverInfo;
+import com.example.db_design_service.bean.DriverInfoReturnData;
+import com.example.db_design_service.bean.GetAllDriverReturnData;
 import com.example.db_design_service.dao.DriverDao;
-import com.example.db_design_service.dao.UserDao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,28 +23,32 @@ public class DriverService {
     @Resource
     private DriverDao driverDao;
 
+
     /**
-     * 查询所有司机的信息
+     *
+     * 查询所有司机信息
      * @return
      */
-    public List<Driver> selectAllDriver() {
+    public List<DriverInfo> selectAllDriver() {
         return driverDao.findAllDriver();
     }
 
 
     /**
-     * 查询某司机的信息(jobId为主键)
+     *
+     * 查询某一司机d信息(jobId为主键)
      * @param jobId
      * @return
      */
-    public Driver selectDriverInfo(String jobId)
+    public DriverInfo selectDriverInfo(int jobId)
     {
         return driverDao.findDriverInfo(jobId);
     }
 
 
     /**
-     * 插入司机信息
+     *
+     * 插入新的司机信息
      * @param driverName
      * @param entryTime
      * @param gender
@@ -53,26 +57,32 @@ public class DriverService {
      */
    public boolean insertDriver(String driverName, Date entryTime, String gender, int jobId)
     {
-        driverDao.insertDriver(driverName, entryTime, gender, jobId);
+        driverDao.insertDriver(driverName, entryTime, gender, jobId);//注意dao和service层各自的insertDriver函数类型不同
         return true;
-    }
-
-
-    /**
-     * 修改司机信息 (jobId作为主键不轻易修改)
-     * @param driverName
-     * @param entryTime
-     * @param gender
-     */
-    public void UpdateDriverInfe(String driverName, Date entryTime, String gender)
-    {
-        driverDao.UptateDriver(driverName,entryTime,gender);
     }
 
     
     /**
-     * 删除司机信息(jobId为主键)
+     *
+     *
+     * 修改司机相关信息
+     *
+     * @param driverName
+     * @param entryTime
+     * @param gender
      * @param jobId
+     */
+    public void updateDriver(String driverName, Date entryTime, String gender, int jobId)
+    {
+        driverDao.uptateDriver(driverName, entryTime, gender, jobId);
+    }
+
+
+    /**
+     *
+     * 删除某司机的信息
+     * @param jobId
+     * @return
      */
     public void deleteDriver(int jobId)
     {

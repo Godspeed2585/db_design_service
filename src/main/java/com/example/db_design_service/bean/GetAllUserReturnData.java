@@ -4,9 +4,9 @@ import java.util.List;
 
 public class GetAllUserReturnData {
     private int status;
-    private List<User> userList;
+    private List<UserInfo> userList; //对User进行List处理
 
-    public GetAllUserReturnData(int status, List<User> userList) {
+    public GetAllUserReturnData(int status, List<UserInfo> userList) {
         this.status = status;
         this.userList = userList;
     }
@@ -14,6 +14,6 @@ public class GetAllUserReturnData {
     public int getStatus() {return status;}
     public void setStatus(int status) {this.status = status;}
 
-    public List<User> getUserList() {return userList;}
-    public void setUserList(List<User> userList) {this.userList = userList;}
+    public List<UserInfo> getUserList() {return userList;}
+    public void setUserList(List<UserInfo> userList) {this.userList = userList;}
 }

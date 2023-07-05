@@ -1,6 +1,6 @@
 package com.example.db_design_service.service;
 
-import com.example.db_design_service.bean.User;
+import com.example.db_design_service.bean.UserInfo;
 import com.example.db_design_service.bean.UserLogin;
 import com.example.db_design_service.dao.UserDao;
 import org.apache.ibatis.annotations.Param;
@@ -19,28 +19,33 @@ public class UserService {
     @Resource
     private UserDao userDao;
 
+
     /**
-     * 查找所有用户
+     *
+     * 查询所有用户信息(仅管理员可用)
      * @return
      */
-    public List<User> selectAllUser() {
+    public List<UserInfo> selectAllUser() {
         return userDao.findAllUser();
     }
 
+
     /**
-     * 查找所有用户的登陆信息
+     *
+     * 查找所有用户的用户名与密码(仅管理员可用)
      * @return
      */
     public List<UserLogin> selectAllUserLogin() {
         return userDao.findAllUserLogin();
     }
-    
+
+
     /**
-     * 查询某用户信息(phoneNumber为主键)
+     * 查询某用户信息(使用主键phoneNumber)
      * @param phoneNumber
      * @return
      */
-    public User selectUserInfo(String phoneNumber)
+    public UserInfo selectUserInfo(String phoneNumber)
     {
         return userDao.findUserInfo(phoneNumber);
     }
@@ -48,11 +53,11 @@ public class UserService {
 
      /**
      *
-     * 插入用户  注册
+     * 新用户注册(插入新的用户信息)
      * @param user
      * @return
      */
-   public boolean insertUser(User user)
+   public boolean insertUser(UserInfo user)
     {
         userDao.insertUser(user);
         return true;
@@ -60,29 +65,19 @@ public class UserService {
 
 
     /**
-     * 修改用户个人信息 (其中修改password和isAdmin的操作单独列出 phoneNumber作为主键不轻易修改)
-     * @param idCard
-     * @param userName
-     * @param email
-     */
-    public void UpdateUserInfe(String idCard, String userName, String email)
-    {
-        userDao.UptateUser(idCard,userName,email);
-    }
-
-
-    /**
-     * 修改用户类型(将用户身份修改为管理员)
-     * @param isAdmin
+     *
+     * 删除某一用户信息
      * @param phoneNumber
+     * @return
      */
-    public void UpdateisAdmin(boolean isAdmin,String phoneNumber)
+    public void deleteUser(String phoneNumber)
     {
-        userDao.UptateisAdmin(isAdmin,phoneNumber);
+        userDao.deleteUser(phoneNumber);
     }
 
 
     /**
+     *
      * 修改密码
      * @param password
      * @param phoneNumber
@@ -94,12 +89,31 @@ public class UserService {
 
 
     /**
-     * 删除用户信息(phoneNumber为主键)
+     *
+     *
+     * 修改用户个人信息
+     *
+     * @param idCard
+     * @param userName
+     * @param email
      * @param phoneNumber
      */
-    public void deleteUser(String phoneNumber)
+    public void UpdateUserInfo(String idCard, String userName, String email, String phoneNumber)
     {
-        userDao.deleteUser(phoneNumber);
+        userDao.UptateUser(idCard, userName, email, phoneNumber);
     }
 
+    
+    /**
+     *
+     *
+     * 修改用户身份(仅超管可用)
+     *
+     * @param isAdmin
+     * @param phoneNumber
+     */
+    public void UpdateisAdmin(int isAdmin, String phoneNumber)
+    {
+        userDao.UptateisAdmin(isAdmin, phoneNumber);
+    }
 }

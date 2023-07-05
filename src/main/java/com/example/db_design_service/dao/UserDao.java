@@ -1,6 +1,8 @@
 package com.example.db_design_service.dao;
 
-import com.example.db_design_service.bean.User;
+import com.example.db_design_service.bean.UserInfo;
+import com.example.db_design_service.bean.UserInfoReturnData;
+import com.example.db_design_service.bean.GetAllUserReturnData;
 import com.example.db_design_service.bean.UserLogin;
 import org.apache.ibatis.annotations.*;
 
@@ -14,14 +16,14 @@ import java.util.List;
 public interface UserDao {
 
     /**
-     * 查询所有用户信息
+     * 查询所有用户信息(仅管理员可用)
      */
     @Select("select * from user")
-    List<User> findAllUser();
+    List<UserInfo> findAllUser();
 
 
     /**
-     * 查询用户的登陆信息
+     * 查询用户的登录信息
      * @return
      */
     @Select("select phoneNumber,password from user")
@@ -34,34 +36,34 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user where phoneNumber=#{phoneNumber}")
-    User findUserInfo(@Param("phoneNumber") String phoneNumber);
+    UserInfo findUserInfo(@Param("phoneNumber") String phoneNumber);
     
 
     /**
      * 插入新的用户信息
      */
     @Insert("insert into user (isAdmin,idCard,password,userName,email,phoneNumber) values ( #{user.isAdmin}, #{user.idCard}, #{user.password},#{user.userName},#{user.email},#{user.phoneNumber})")
-    void insertUser(@Param("user") User user);
+    void insertUser(@Param("user") UserInfo user);
 
 
     /**
-     *修改用户信息(其中修改password和isAdmin的操作单独列出 phoneNumber作为主键不轻易修改)
+     *修改用户信息(其中修改password和isAdmin的操作单独列出 phoneNumber作为user表的主键不轻易修改)
      * @param idCard
      * @param userName
      * @param email
      * @param phoneNumber
      */
     @Update("update user set userName = #{userName} , email = #{email} , idCard = #{idCard} where phoneNumber = #{phoneNumber}")
-    void UptateUser(@Param("idCard") String idCard, @Param("userName") String userName, @Param("email") String email);
+    void UptateUser(@Param("idCard") String idCard, @Param("userName") String userName, @Param("email") String email, @Param("phoneNumber") String phoneNumber);
 
 
     /**
-     * 修改用户类型(将用户身份修改为管理员)
+     * 修改用户类型(仅超管可用)
      * @param isAdmin
      * @param phoneNumber
      */
     @Update("update user set isAdmin = #{isAdmin} where phoneNumber = #{phoneNumber}")
-    void UptateisAdmin(@Param("isAdmin") boolean isAdmin,String phoneNumber);
+    void UptateisAdmin(@Param("isAdmin") int isAdmin, @Param("phoneNumber") String phoneNumber);
 
 
     /**

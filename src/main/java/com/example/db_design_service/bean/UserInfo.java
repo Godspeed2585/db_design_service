@@ -1,14 +1,14 @@
 package com.example.db_design_service.bean;
 
 public class UserInfo {
-    public boolean isAdmin;//用于区分是否管理员
+    public int isAdmin;//用于区分用户权限 0普通用户 1管理员 2超管
     private String idCard;//身份证号
     private String password;//密码
     private String userName;//用户名
     private String email;//邮箱
     private String phoneNumber;//电话号码
 
-    public UserInfo(boolean isAdmin,String idCard,String password,
+    public UserInfo(int isAdmin,String idCard,String password,
                 String userName,String email,String phoneNumber)
     {
         this.isAdmin = isAdmin;
@@ -19,8 +19,8 @@ public class UserInfo {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean getisAdmin() {return isAdmin;}
-    public void setisAdmin(boolean isAdmin) {this.isAdmin = isAdmin;}
+    public int getisAdmin() {return isAdmin;}
+    public void setisAdmin(int isAdmin) {this.isAdmin = isAdmin;}
 
     public String getidCard() {return idCard;}
     public void setidCard(String idCard) {this.idCard = idCard;}
