@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.warehouse.mapper.BusMapper">
+
+    <!-- 根据licence查询bus信息 -->
+    <select id="findBylicense" resultType="Bus">
+        SELECT * FROM "TicketManagement".bus WHERE license = #{license}
+    </select>
+
+    <!-- 新增bus信息 -->
+    <insert id="insert" parameterType="Bus">
+        INSERT INTO "TicketManagement".bus (license, totalFirst, totalSecond)
+        VALUES (#{license}, #{totalFirst}, #{totalSecond})
+    </insert>
+
+    <!-- 更新bus信息 -->
+    <update id="update" parameterType="Bus">
+        UPDATE "TicketManagement".bus SET totalFirst = #{totalFirst}, totalSecond = #{totalSecond}
+        WHERE license = #{license}
+    </update>
+
+    <!-- 删除bus信息 -->
+    <delete id="delete" parameterType="String" >
+        DELETE FROM "TicketManagement".bus WHERE license = #{license}
+    </delete>
+
+    <!-- 查询bus是否存在 -->
+    <select id="isExist" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".bus WHERE license = #{license} LIMIT 1
+    </select>
+
+</mapper>
