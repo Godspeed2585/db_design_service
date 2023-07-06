@@ -1,5 +1,7 @@
 package com.wk.warehouse.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +22,7 @@ import com.wk.warehouse.service.BusService;
 import java.util.List;
 
 @RestController // 会自动生成一个类型首字母小写的对象
+@Api(tags = "车辆管理")
 @RequestMapping("/Bus")
 public class BusController {
     @Autowired()
@@ -28,6 +31,7 @@ public class BusController {
      * 根据license查询bus
      */
     @GetMapping("/getBus/license")
+    @ApiOperation(value = "根据license查询bus")
     public Result FindBus(@RequestParam String license){
         List<Bus> BusList=busService.findBylicense(license);
         if(null == BusList) return Result.err(Result.CODE_NOT_FIND, "找不到车辆");
@@ -37,6 +41,7 @@ public class BusController {
      * 删除bus
      */
     @DeleteMapping("/deleteBus")
+    @ApiOperation(value = "根据license删除bus")
     public Result deleteBus(@RequestParam String license){
         int updateRows = busService.delete(license);
         if(updateRows>0){
@@ -49,6 +54,7 @@ public class BusController {
      * 更改bus
      */
     @PutMapping("/updataBus")
+    @ApiOperation(value = "根据license更新bus")
     public Result updateBus(@RequestBody Bus busobj){
         int updateRows = busService.update(busobj);
         if(updateRows>0){
@@ -62,6 +68,7 @@ public class BusController {
      */
     /** 添加站点*/
     @PostMapping("/addBus")
+    @ApiOperation(value = "添加bus")
     public Result addBus(@RequestBody Bus busobj){
         int isDuplicate = busService.isExist(busobj.getLicense()); // 判断新添加的角色是否和现有角色重复
         if (isDuplicate != 0) {

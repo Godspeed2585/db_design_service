@@ -1,5 +1,7 @@
 package com.wk.warehouse.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +22,7 @@ import com.wk.warehouse.service.OrderService;
 import java.util.List;
 
 @RestController // 会自动生成一个类型首字母小写的对象
+@Api(tags = "订单管理")
 @RequestMapping("/Order")
 public class OrderController {
     @Autowired()
@@ -28,6 +31,7 @@ public class OrderController {
      * 根据orderId查询order
      */
     @GetMapping("/getOrder/orderId")
+    @ApiOperation(value = "根据orderId查询order")
     public Result FindOrder(@RequestParam int orderId){
         List<Order> OrderList=orderService.findByorderId(orderId);
         if(null == OrderList) return Result.err(Result.CODE_NOT_FIND, "找不到订单");
@@ -37,6 +41,7 @@ public class OrderController {
      * 删除order
      */
     @DeleteMapping("/deleteOrder")
+    @ApiOperation(value = "根据orderId删除order")
     public Result deleteOrder(@RequestParam int orderId){
         int updateRows = orderService.delete(orderId);
         if(updateRows>0){
@@ -49,6 +54,7 @@ public class OrderController {
      * 更改order
      */
     @PutMapping("/updataOrder")
+    @ApiOperation(value = "根据orderId更新order")
     public Result updateOrder(@RequestBody Order orderobj){
         int updateRows = orderService.update(orderobj);
         if(updateRows>0){
@@ -62,6 +68,7 @@ public class OrderController {
      */
     /** 添加站点*/
     @PostMapping("/addOrder")
+    @ApiOperation(value = "添加order")
     public Result addOrder(@RequestBody Order orderobj){
         int isDuplicate = orderService.isExist(orderobj.getOrderId()); // 判断新添加的角色是否和现有角色重复
         if (isDuplicate != 0) {

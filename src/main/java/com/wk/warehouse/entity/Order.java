@@ -28,6 +28,8 @@ public class Order {
 
     private String idCard;
 
+    private float cost;
+
 
     public int getOrderId() {
         return orderId;
@@ -131,5 +133,13 @@ public class Order {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public void setCost(float cost) {
+        this.cost = cost;
     }
 }

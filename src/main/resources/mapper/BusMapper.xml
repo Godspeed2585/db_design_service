@@ -10,13 +10,13 @@
 
     <!-- 新增bus信息 -->
     <insert id="insert" parameterType="Bus">
-        INSERT INTO "TicketManagement".bus (license, totalFirst, totalSecond)
+        INSERT INTO "TicketManagement".bus (license, "totalFirst", "totalSecond")
         VALUES (#{license}, #{totalFirst}, #{totalSecond})
     </insert>
 
     <!-- 更新bus信息 -->
     <update id="update" parameterType="Bus">
-        UPDATE "TicketManagement".bus SET totalFirst = #{totalFirst}, totalSecond = #{totalSecond}
+        UPDATE "TicketManagement".bus SET "totalFirst" = #{totalFirst}, "totalSecond" = #{totalSecond}
         WHERE license = #{license}
     </update>
 
