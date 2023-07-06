@@ -30,7 +30,7 @@
     <select id="getClassByRouteIdDate" resultType="com.wk.warehouse.entity.Class">
         SELECT * FROM "TicketManagement".class
         WHERE routeId = #{routeId}
-            AND times >= #{startDate}
-            AND times < #{endDate}
+            AND times &gt;= #{startDate}
+            AND times &lt; #{endDate}
     </select>
 </mapper>
