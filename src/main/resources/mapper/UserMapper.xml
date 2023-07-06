@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.warehouse.mapper.UerMapper">
+
+<!-- 查询所有用户信息 -->
+	<select id="findAllUser" resultType="List<UserInfo>">
+		select * from "TicketManagement".user
+	</select>
+
+<!-- 查询用户登录信息 -->
+	<select id="findAllUserLogin" resultType="List<UserInfo>">
+		select phoneNumber,password from "TicketManagement".user
+	</select>
+
+<!-- 根据phoneNumber查用户信息 -->
+	<select id="findUserInfo" parameterType="String" resultType="UserInfo">
+		select * from "TicketManagement".user where phoneNumber=#{phoneNumber}
+	</select>
+
+<!-- 添加新用户 -->
+	<insert id="insertUser" parameterType="UserInfo">
+		insert into "TicketManagement".user(isAdmin, idCard, password, userName, email, phoneNumber)
+			values(0, #{user.idCard}, #{user.password}, #{user.userName}, #{user.email}, #{user.phoneNumber})<!-- 新用户默认非管理员 -->
+	</insert>
+
+<!-- 修改用户信息 -->
+	<update id="UpdateUser" >
+		update "TicketManagement".user set userName = #{userName} , email = #{email} , idCard = #{idCard} where phoneNumber = #{phoneNumber}
+	</update>
+
+<!-- 修改用户姓名 -->
+	<update id="UpdateUserName">
+		update "TicketManagement".user set userName = #{userName}  where phoneNumber = #{phoneNumber}
+	</update>
+
+<!-- 修改用户email -->
+	<update id="UpdateUseremail">
+		update "TicketManagement".user set email = #{email}  where phoneNumber = #{phoneNumber}
+	</update>
+
+<!-- 修改用户idCard -->
+	<update id="UpdateUseridCard">
+		update "TicketManagement".user set idCard = #{idCard}  where phoneNumber = #{phoneNumber}
+	</update>
+
+<!-- 修改用户类型 -->
+    <update id="UptateisAdmin">
+    update "TicketManagement".user set isAdmin = #{isAdmin} where phoneNumber = #{phoneNumber}
+    </update>
+
+<!-- 修改用户密码 -->
+    <update id="UptatePassword">
+    update "TicketManagement".user set password = #{password} where phoneNumber = #{phoneNumber}
+    </update>
+
+<!-- 删除用户-->
+    <delete id="deleteUser">
+    delete from "TicketManagement".user where phoneNumber = #{phoneNumber}
+    </delete>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace的是必须是Mapper接口的全路径 -->
+<mapper namespace="com.wk.warehouse.mapper.DriverMapper">
+
+<!-- 查询所有司机信息 -->
+	<select id="findAllDriver" resultType="List<DriverInfo>">
+		select * from "TicketManagement".driver
+	</select>
+
+<!-- 使用jobId查询司机信息 -->
+	<select id="findDriverInfo" parameterType="int" resultType="DriverInfo">
+		select * from "TicketManagement".driver where jobId=#{jobId}
+	</select>
+
+<!-- 使用driverName查询司机信息 -->
+	<select id="findDriverInfoByName" parameterType="String" resultType="DriverInfo">
+		select * from "TicketManagement".driver where driverName=#{driverName}
+	</select>
+
+<!-- 插入新的司机信息 -->
+	<insert id="insertDriver" >
+		insert into "TicketManagement".driver (driverName, entryTime, gender, jobId) values ( #{driverName}, #{entryTime}, #{gender},#{jobId})
+	</insert>
+
+<!-- 修改司机信息 -->
+	<update id="uptateDriver" >
+		update "TicketManagement".driver set driverName=#{driverName}, entryTime=#{entryTime}, gender=#{gender} where jobId = #{jobId}
+	</update>
+
+<!-- 修改司机信息-司机姓名 -->
+	<update id="uptateDriverName" >
+		update "TicketManagement".driver set driverName=#{driverName} where jobId = #{jobId}
+	</update>
+
+<!-- 修改司机信息-入职时间 -->
+	<update id="uptateDriverTime" >
+		update "TicketManagement".driver set entryTime=#{entryTime} where jobId = #{jobId}
+	</update>
+
+<!-- 修改司机信息-司机性别 -->
+	<update id="uptateDriverGender" >
+		update "TicketManagement".driver set gender=#{gender} where jobId = #{jobId}
+	</update>
+
+<!-- 删除司机信息 -->
+	<update id="deleteDriver" parameterType="int">
+		delete from "TicketManagement".driver where jobId = #{jobId}
+	</update>
+
+</mapper>
