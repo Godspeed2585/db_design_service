@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.warehouse.mapper.StopoverStationsMapper">
+
+    <insert id="insert" parameterType="StopoverStations">
+        INSERT INTO "TicketManagement"."stopoverStations" ("stationName", "arriveTime", "departureTime", length, "routeId", number)
+        VALUES (#{stationName}, #{arriveTime}, #{departureTime}, #{length}, #{routeId}, #{number})
+    </insert>
+
+    <update id="update" parameterType="StopoverStations">
+        UPDATE "TicketManagement"."stopoverStations" SET "stationName" = #{stationName}, "arriveTime" = #{arriveTime},
+        "departureTime" = #{departureTime}, length = #{length} WHERE "routeId" = #{routeId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{userId} AND number = #{number}
+    </delete>
+
+    <select id="findByrouteId" resultType="StopoverStations">
+        SELECT * FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId} ORDER BY number ASC
+    </select>
+
+    <select id="findAll" resultType="StopoverStations">
+        SELECT * FROM "TicketManagement"."stopoverStations"
+    </select>
+
+    <delete id="deleteByRouteId" parameterType="int">
+        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{userId}
+    </delete>
+
+    <select id="getRouteIdByBE" resultType="StopoverStations">
+        SELECT "routeId"
+        FROM "TicketManagement"."stopoverStations"
+        WHERE "stationName" = #{begin}
+        INTERSECT
+        SELECT "routeId"
+        FROM "TicketManagement"."stopoverStations"
+        WHERE "stationName" = #{end}
+    </select>
+</mapper>
