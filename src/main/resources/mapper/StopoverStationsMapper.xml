@@ -4,13 +4,13 @@
 <mapper namespace="com.wk.warehouse.mapper.StopoverStationsMapper">
 
     <insert id="insert" parameterType="StopoverStations">
-        INSERT INTO "TicketManagement"."stopoverStations" ("stationName", "arriveTime", "departureTime", length, "routeId", number)
-        VALUES (#{stationName}, #{arriveTime}, #{departureTime}, #{length}, #{routeId}, #{number})
+        INSERT INTO "TicketManagement"."stopoverStations" ("routeId", number, "stationName", "arriveTime", "departureTime", length)
+        VALUES (#{routeId}, #{number}, #{stationName}, #{arriveTime}, #{departureTime}, #{length})
     </insert>
 
     <update id="update" parameterType="StopoverStations">
         UPDATE "TicketManagement"."stopoverStations" SET "stationName" = #{stationName}, "arriveTime" = #{arriveTime},
-        "departureTime" = #{departureTime}, length = #{length} WHERE "routeId" = #{routeId}
+        "departureTime" = #{departureTime}, length = #{length} WHERE "routeId" = #{routeId} AND "number" = #{number}
     </update>
 
     <delete id="delete" parameterType="int">
@@ -26,7 +26,7 @@
     </select>
 
     <delete id="deleteByRouteId" parameterType="int">
-        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{userId}
+        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId}
     </delete>
 
     <select id="getRouteIdByBE" resultType="StopoverStations">

@@ -5,29 +5,29 @@
 
     <!-- 根据routeId查询车站信息 -->
     <select id="findByRouteId" resultType="ifStations">
-        SELECT * FROM "TicketManagement".ifStations WHERE routeId = #{routeId}
+        SELECT * FROM "TicketManagement"."ifStation" WHERE "routeId" = #{routeId}
     </select>
 
     <!-- 根据initialStation和finalStation查询车站信息
     <select id="findByStations" resultType="ifStations">
-        SELECT * FROM "TicketManagement".ifStations WHERE initialStation = #{initialStation} AND finalStation = #{finalStation}
+        SELECT * FROM "TicketManagement"."ifStation" WHERE "initialStation" = #{initialStation} AND finalStation = #{finalStation}
     </select> -->
 
     <!-- 新增车站信息 -->
     <insert id="insert" parameterType="ifStations" >
-        INSERT INTO "TicketManagement".ifStations (initialStation, finalStation, totalLength)
-        VALUES (#{initialStation}, #{finalStation}, #{totalLength})
+        INSERT INTO "TicketManagement"."ifStation" ("routeId","initialStation", "finalStation", "totalLength")
+        VALUES (#{routeId},#{initialStation}, #{finalStation}, #{totalLength})
     </insert>
 
     <!-- 更新车站信息 -->
     <update id="update" parameterType="ifStations">
-        UPDATE "TicketManagement".ifStations SET initialStation = #{initialStation}, finalStation = #{finalStation}, totalLength = #{totalLength}
-        WHERE routeId = #{routeId}
+        UPDATE "TicketManagement"."ifStation" SET "initialStation" = #{initialStation}, finalStation = #{finalStation}, totalLength = #{totalLength}
+        WHERE "routeId" = #{routeId}
     </update>
 
     <!-- 删除车站信息 -->
     <delete id="delete" parameterType="int">
-        DELETE FROM "TicketManagement".ifStations WHERE routeId = #{routeId}
+        DELETE FROM "TicketManagement"."ifStation" WHERE "routeId" = #{routeId}
     </delete>
 
 </mapper>

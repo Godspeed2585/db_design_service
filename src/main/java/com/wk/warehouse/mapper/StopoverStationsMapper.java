@@ -15,7 +15,7 @@ public interface StopoverStationsMapper {
 
     List<StopoverStations> findAll();
 
-    int deleteByRouteId(@Param("userId") int id);
+    int deleteByRouteId(@Param("routeId") int id);
 
     List<Integer> getRouteIdByBE(@Param("begin") String begin, @Param("end") String end);
 }
