@@ -1,0 +1,78 @@
+package com.wk.warehouse.controller;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+// 表示该类是一个控制器，可以接收前端的请求并响应
+// 响应的是json数据
+
+import org.springframework.beans.factory.annotation.Autowired;
+import com.wk.warehouse.entity.Result;
+import com.wk.warehouse.entity.Order;
+import com.wk.warehouse.service.OrderService;
+
+import java.util.List;
+
+@RestController // 会自动生成一个类型首字母小写的对象
+@RequestMapping("/Order")
+public class OrderController {
+    @Autowired()
+    private OrderService orderService;
+    /**
+     * 根据orderId查询order
+     */
+    @GetMapping("/getOrder/orderId")
+    public Result FindOrder(@RequestParam int orderId){
+        List<Order> OrderList=orderService.findByorderId(orderId);
+        if(null == OrderList) return Result.err(Result.CODE_NOT_FIND, "找不到订单");
+        else return Result.ok(OrderList);
+    }
+    /**
+     * 删除order
+     */
+    @DeleteMapping("/deleteOrder")
+    public Result deleteOrder(@RequestParam int orderId){
+        int updateRows = orderService.delete(orderId);
+        if(updateRows>0){
+            return Result.ok("删除成功！");
+        }else{
+            return Result.err(Result.CODE_ERR_SYS, "删除失败！");
+        }
+    }
+    /**
+     * 更改order
+     */
+    @PutMapping("/updataOrder")
+    public Result updateOrder(@RequestBody Order orderobj){
+        int updateRows = orderService.update(orderobj);
+        if(updateRows>0){
+            return Result.ok("修改成功！");
+        }else{
+            return Result.err(Result.CODE_ERR_SYS, "修改失败！");
+        }
+    }
+    /*
+     * 增加order
+     */
+    /** 添加站点*/
+    @PostMapping("/addOrder")
+    public Result addOrder(@RequestBody Order orderobj){
+        int isDuplicate = orderService.isExist(orderobj.getOrderId()); // 判断新添加的角色是否和现有角色重复
+        if (isDuplicate != 0) {
+            return Result.err(Result.CODE_ERR_SYS, "车辆已存在！");
+        }
+        int updateRows = orderService.insert(orderobj);
+        if(updateRows>0){
+            return Result.ok("添加成功！");
+        }else{
+            return Result.err(Result.CODE_ERR_SYS, "添加失败！");
+        }
+
+    }
+}

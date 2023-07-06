@@ -7,9 +7,9 @@ import java.util.List;
 public interface BusService {
     List<Bus> findBylicense(String license);
 
-    int insert(Bus Bus);
+    int insert(Bus bus);
 
-    int update(Bus Bus);
+    int update(Bus bus);
 
     int delete(String license);
     int isExist(String license);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.warehouse.mapper.OrderMapper">
+
+    <!-- 根据orderId查询order信息 -->
+    <select id="findByorderId" parameterType="int" resultType="Order">
+        SELECT * FROM "TicketManagement".order WHERE orderId = #{orderId}
+    </select>
+
+    <!-- 新增order信息 -->
+    <insert id="insert" parameterType="Order">
+        INSERT INTO "TicketManagement".order (orderId, seatNumber, wagonId, times, phoneNumber, isPaid, isCancel, isFinish, startStation, destination, license, ticketType, idCard)
+        VALUES (#{orderId}, #{seatNumber}, #{wagonId}, #{times}, #{phoneNumber}, #{isPaid}, #{isCancel}, #{isFinish}, #{startStation}, #{destiation}, #{license}, #{ticketType}, #{idCard})
+    </insert>
+
+    <!-- 更新order信息 -->
+    <update id="update" parameterType="Order">
+        UPDATE "TicketManagement".order SET seatNumber = #{seatNumber}, wagonId = #{wagonId}, times = #{times}, phoneNumber = #{phoneNumber}, isPaid = #{isPaid}, isCancel = #{isCancel}, isFinish = #{isFinish}, startStation = #{startStation}, destination = #{destination}, license = #{license}, ticketType = #{ticketType}, idCard = #{idCard}
+        WHERE orderId = #{orderId}
+    </update>
+
+    <!-- 删除order信息 -->
+    <delete id="delete" parameterType="int" >
+        DELETE FROM "TicketManagement".order WHERE orderId = #{orderId}
+    </delete>
+
+    <!-- 查询order是否存在 -->
+    <select id="isExist" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".order WHERE orderId = #{orderId} LIMIT 1
+    </select>
+
+</mapper>
