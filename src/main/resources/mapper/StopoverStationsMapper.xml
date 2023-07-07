@@ -21,6 +21,10 @@
         SELECT * FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId} ORDER BY number ASC
     </select>
 
+    <select id="findByrouteId_Stations" resultType="StopoverStations">
+        SELECT * FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId} AND "stationName" = #{station}
+    </select>
+
     <select id="findAll" resultType="StopoverStations">
         SELECT * FROM "TicketManagement"."stopoverStations"
     </select>

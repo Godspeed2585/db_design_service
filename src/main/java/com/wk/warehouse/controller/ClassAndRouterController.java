@@ -17,6 +17,8 @@ import java.util.Map;
 // 响应的是json数据
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.wk.warehouse.entity.StopoverStations;
 import com.wk.warehouse.entity.Result;
 import com.wk.warehouse.service.ClassAndRouteService;
@@ -33,11 +35,11 @@ public class ClassAndRouterController {
     private ClassAndRouteService classAndRouteService;
 
     /** 给出上车的起点begin和终点end和日期date，查询符合需求的班次*/
-    // @GetMapping("/getClass/BE")
-    // public Result getClassByBE(@RequestParam String begin,@RequestParam String end,@RequestParam LocalDate date){
-    //     List< Map<String, Object>> classAndRemainList= classAndRouteService.getClassAndRemainByBE(begin, end, date);
-    //     return Result.ok(classAndRemainList);
-    // }
+    @GetMapping("/getClass/BE")
+    public Result getClassByBE(@RequestParam String begin,@RequestParam String end,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date){
+        List< Map<String, Object>> classAndRemainList= classAndRouteService.getClassAndRemainByBE(begin, end, date);
+        return Result.ok(classAndRemainList);
+    }
 
     //根据班次查询路线
     @PostMapping("/getRoute/wagonId")

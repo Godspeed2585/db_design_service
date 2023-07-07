@@ -12,8 +12,8 @@ public interface ClassAndRouteService {
     public List<Class> getClassByBE(String begin,String end,LocalDate date);
 
 
-    // /** 根据给出的首末站查询符合的车辆以及车辆对应的余票量和票价 */
-    // public List<Map<String, Object>> getClassAndRemainByBE(String begin,String end,LocalDate date);
+    /** 根据给出的首末站查询符合的车辆以及车辆对应的余票量和票价 */
+    public List<Map<String, Object>> getClassAndRemainByBE(String begin,String end,LocalDate date);
 
     /** 根据给出的车辆编号查询路线 */
     public List<StopoverStations> getRouteBywagonId(String wagonId);
