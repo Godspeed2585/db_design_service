@@ -30,7 +30,7 @@ public class BusController {
     /**
      * 根据license查询bus
      */
-    @GetMapping("/getBus/license")
+    @GetMapping("/getBus")
     @ApiOperation(value = "根据license查询bus")
     public Result FindBus(@RequestParam String license){
         List<Bus> BusList=busService.findBylicense(license);
@@ -81,5 +81,17 @@ public class BusController {
             return Result.err(Result.CODE_ERR_SYS, "添加失败！");
         }
 
+    }
+
+    /*
+     * 根据license查询bus所得的表的总数
+     */
+    /** 添加站点*/
+    @GetMapping("/total_getBus")
+    @ApiOperation(value = "根据license查询bus所得的表的项目总数")
+    public Result TotalNum_FindBus(@RequestParam String license){
+        int total= busService.total_findBylicense(license);
+        if(total < 0) return Result.err(Result.CODE_NOT_FIND, "错误:无法根据license查询bus所得的表的总数");
+        else return Result.ok(total);
     }
 }

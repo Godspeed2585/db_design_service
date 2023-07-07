@@ -13,4 +13,6 @@ public interface BusService {
 
     int delete(String license);
     int isExist(String license);
+
+    int total_findBylicense(String license);
 }

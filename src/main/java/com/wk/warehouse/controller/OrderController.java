@@ -30,7 +30,7 @@ public class OrderController {
     /**
      * 根据orderId查询order
      */
-    @GetMapping("/getOrder/orderId")
+    @GetMapping("/getOrder")
     @ApiOperation(value = "根据orderId查询order")
     public Result FindOrder(@RequestParam int orderId){
         List<Order> OrderList=orderService.findByorderId(orderId);
@@ -82,4 +82,17 @@ public class OrderController {
         }
 
     }
+
+    /*
+     * 根据orderId查询order所得的表的总数
+     */
+    /** 添加站点*/
+    @GetMapping("/total_getOrder")
+    @ApiOperation(value = "根据orderId查询order所得的表的项目总数")
+    public Result TotalNum_FindOrder(@RequestParam int orderId){
+        int total= orderService.total_findByorderId(orderId);
+        if(total < 0) return Result.err(Result.CODE_NOT_FIND, "错误:无法根据orderId查询order所得的表的总数");
+        else return Result.ok(total);
+    }
+
 }

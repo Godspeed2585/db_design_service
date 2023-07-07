@@ -39,4 +39,6 @@ public class OrderServiceImpl implements OrderService {
     public int isExist(int orderId) {
         return OrderMapper.isExist(orderId);
     }
+
+    public int total_findByorderId(int orderId) { return OrderMapper.total_findByorderId(orderId); }
 }

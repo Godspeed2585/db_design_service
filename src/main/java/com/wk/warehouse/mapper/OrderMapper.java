@@ -20,4 +20,6 @@ public interface OrderMapper {
     int delete(int orderId);
 
     int isExist(int orderId);
+
+    int total_findByorderId(int orderId);
 }

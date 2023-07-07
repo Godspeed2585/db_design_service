@@ -13,4 +13,6 @@ public interface OrderService {
 
     int delete(int orderId);
     int isExist(int orderId);
+
+    int total_findByorderId(int orderId);
 }

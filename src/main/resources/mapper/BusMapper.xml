@@ -30,4 +30,9 @@
         SELECT COUNT(*) FROM "TicketManagement".bus WHERE license = #{license} LIMIT 1
     </select>
 
+    <!-- 根据license查询bus所得的表的项目总数 -->
+    <select id="total_findBylicense" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".bus WHERE license = #{license}
+    </select>
+
 </mapper>

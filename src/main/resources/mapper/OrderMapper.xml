@@ -30,4 +30,9 @@
         SELECT COUNT(*) FROM "TicketManagement".order WHERE "orderId" = #{orderId} LIMIT 1
     </select>
 
+    <!-- 根据orderId查询order所得的表的项目总数 -->
+    <select id="total_findByorderId" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".order WHERE "orderId" = #{orderId}
+    </select>
+
 </mapper>

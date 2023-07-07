@@ -20,5 +20,7 @@ public interface BusMapper {
     // 删除车辆信息
     int delete(String license);
 
-    public int isExist(String license);
+    int isExist(String license);
+
+    int total_findBylicense(String license);
 }

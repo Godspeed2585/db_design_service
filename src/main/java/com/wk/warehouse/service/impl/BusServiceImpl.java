@@ -38,7 +38,11 @@ public class BusServiceImpl implements BusService {
         return BusMapper.delete(license);
     }
 
+    @Override
     public int isExist(String license) {
         return BusMapper.isExist(license);
     }
+
+    @Override
+    public int total_findBylicense(String license) { return BusMapper.total_findBylicense(license); }
 }
