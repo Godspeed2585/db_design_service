@@ -7,6 +7,8 @@ import java.util.List;
 public interface OrderService {
     List<Order> findByorderId(int orderId);
 
+    List<Order> findBywagonId(String wagonId);
+
     int insert(Order order);
 
     int update(Order order);

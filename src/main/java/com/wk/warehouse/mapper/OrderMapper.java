@@ -10,6 +10,8 @@ public interface OrderMapper {
     // 根据orderId查询order信息
     List<Order> findByorderId(int orderId);
 
+    List<Order> findBywagonId(String wagonId);
+
     // 新增order信息
     int insert(Order order);
 

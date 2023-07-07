@@ -24,6 +24,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findBywagonId(String wagonId) { return OrderMapper.findBywagonId(wagonId); };
+
+    @Override
     public int insert(Order order) {
         return OrderMapper.insert(order);
     }

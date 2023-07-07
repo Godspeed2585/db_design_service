@@ -8,6 +8,11 @@
         SELECT * FROM "TicketManagement".order WHERE "orderId" = #{orderId}
     </select>
 
+    <!-- 根据wagonId查询order信息 -->
+    <select id="findBywagonId" parameterType="String" resultType="Order">
+        SELECT * FROM "TicketManagement".order WHERE "wagonId" = #{wagonId}
+    </select>
+
     <!-- 新增order信息 -->
     <insert id="insert" parameterType="Order">
         INSERT INTO "TicketManagement".order ("orderId", "seatNumber", "wagonId", times, "phoneNumber", "isPaid", "isCancel", "isFinish", "startStation", destination, license, "ticketType", "idCard", "cost")
