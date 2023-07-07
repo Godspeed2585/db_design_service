@@ -24,6 +24,11 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
+    public List<Bus> findBypage(int page) {
+        return BusMapper.findBypage(page);
+    }
+
+    @Override
     public int insert(Bus bus) {
         return BusMapper.insert(bus);
     }
@@ -44,5 +49,5 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public int total_findBylicense(String license) { return BusMapper.total_findBylicense(license); }
+    public int total_bus() { return BusMapper.total_bus(); }
 }

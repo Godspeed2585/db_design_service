@@ -27,6 +27,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findBywagonId(String wagonId) { return OrderMapper.findBywagonId(wagonId); }
 
     @Override
+    public List<Order> findBypage(int page) { return OrderMapper.findBypage(page); }
+
+    @Override
     public int insert(Order order) {
         return OrderMapper.insert(order);
     }
@@ -43,5 +46,5 @@ public class OrderServiceImpl implements OrderService {
         return OrderMapper.isExist(orderId);
     }
 
-    public int total_findByorderId(int orderId) { return OrderMapper.total_findByorderId(orderId); }
+    public int total_order() { return OrderMapper.total_order(); }
 }

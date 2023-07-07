@@ -1,5 +1,6 @@
 package com.wk.warehouse.mapper;
 
+import com.wk.warehouse.entity.Bus;
 import com.wk.warehouse.entity.Order;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,8 @@ public interface OrderMapper {
 
     List<Order> findBywagonId(String wagonId);
 
+    List<Order> findBypage(int page);
+
     // 新增order信息
     int insert(Order order);
 
@@ -23,5 +26,5 @@ public interface OrderMapper {
 
     int isExist(int orderId);
 
-    int total_findByorderId(int orderId);
+    int total_order();
 }

@@ -9,6 +9,8 @@ public interface OrderService {
 
     List<Order> findBywagonId(String wagonId);
 
+    List<Order> findBypage(int page);
+
     int insert(Order order);
 
     int update(Order order);
@@ -16,5 +18,5 @@ public interface OrderService {
     int delete(int orderId);
     int isExist(int orderId);
 
-    int total_findByorderId(int orderId);
+    int total_order();
 }

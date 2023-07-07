@@ -13,6 +13,11 @@
         SELECT * FROM "TicketManagement".order WHERE "wagonId" = #{wagonId}
     </select>
 
+    <!-- 根据page查询总order信息 -->
+    <select id="findBypage" resultType="Order">
+        SELECT * FROM "TicketManagement".order LIMIT 10 OFFSET #{page}
+    </select>
+
     <!-- 新增order信息 -->
     <insert id="insert" parameterType="Order">
         INSERT INTO "TicketManagement".order ("orderId", "seatNumber", "wagonId", times, "phoneNumber", "isPaid", "isCancel", "isFinish", "startStation", destination, license, "ticketType", "idCard", "cost")
@@ -35,9 +40,9 @@
         SELECT COUNT(*) FROM "TicketManagement".order WHERE "orderId" = #{orderId} LIMIT 1
     </select>
 
-    <!-- 根据orderId查询order所得的表的项目总数 -->
-    <select id="total_findByorderId" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM "TicketManagement".order WHERE "orderId" = #{orderId}
+    <!-- 查询order所得的表的项目总数 -->
+    <select id="total_order" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".order
     </select>
 
 </mapper>

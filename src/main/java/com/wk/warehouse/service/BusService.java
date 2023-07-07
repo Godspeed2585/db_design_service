@@ -7,6 +7,8 @@ import java.util.List;
 public interface BusService {
     List<Bus> findBylicense(String license);
 
+    List<Bus> findBypage(int page);
+
     int insert(Bus bus);
 
     int update(Bus bus);
@@ -14,5 +16,5 @@ public interface BusService {
     int delete(String license);
     int isExist(String license);
 
-    int total_findBylicense(String license);
+    int total_bus();
 }

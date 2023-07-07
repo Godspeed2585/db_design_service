@@ -38,6 +38,16 @@ public class BusController {
         else return Result.ok(BusList);
     }
     /**
+     * 根据page查询总bus信息
+     */
+    @GetMapping("/getBusByPage")
+    @ApiOperation(value = "根据page查询总bus信息")
+    public Result FindBusByPage(@RequestParam int page){
+        List<Bus> BusList=busService.findBypage(page*10);
+        //if(null == BusList) return Result.err(Result.CODE_NOT_FIND, "找不到车辆");
+        return Result.ok(BusList);
+    }
+    /**
      * 删除bus
      */
     @DeleteMapping("/deleteBus")
@@ -88,9 +98,9 @@ public class BusController {
      */
     /** 添加站点*/
     @GetMapping("/total_getBus")
-    @ApiOperation(value = "根据license查询bus所得的表的项目总数")
-    public Result TotalNum_FindBus(@RequestParam String license){
-        int total= busService.total_findBylicense(license);
+    @ApiOperation(value = "查询bus表的项目总数")
+    public Result TotalNum_FindBus(){
+        int total= busService.total_bus();
         if(total < 0) return Result.err(Result.CODE_NOT_FIND, "错误:无法根据license查询bus所得的表的总数");
         else return Result.ok(total);
     }

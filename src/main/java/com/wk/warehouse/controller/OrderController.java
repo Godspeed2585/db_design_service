@@ -1,5 +1,6 @@
 package com.wk.warehouse.controller;
 
+import com.wk.warehouse.entity.Bus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +37,16 @@ public class OrderController {
         List<Order> OrderList=orderService.findByorderId(orderId);
         if(null == OrderList) return Result.err(Result.CODE_NOT_FIND, "找不到订单");
         else return Result.ok(OrderList);
+    }
+    /**
+     * 根据page查询总order信息
+     */
+    @GetMapping("/getOrderByPage")
+    @ApiOperation(value = "根据page查询总order信息")
+    public Result FindOrderByPage(@RequestParam int page){
+        List<Order> OrderList=orderService.findBypage(page*10);
+        //if(null == BusList) return Result.err(Result.CODE_NOT_FIND, "找不到车辆");
+        return Result.ok(OrderList);
     }
     /**
      * 删除order
@@ -88,9 +99,9 @@ public class OrderController {
      */
     /** 添加站点*/
     @GetMapping("/total_getOrder")
-    @ApiOperation(value = "根据orderId查询order所得的表的项目总数")
-    public Result TotalNum_FindOrder(@RequestParam int orderId){
-        int total= orderService.total_findByorderId(orderId);
+    @ApiOperation(value = "查询order表的项目总数")
+    public Result TotalNum_FindOrder(){
+        int total= orderService.total_order();
         if(total < 0) return Result.err(Result.CODE_NOT_FIND, "错误:无法根据orderId查询order所得的表的总数");
         else return Result.ok(total);
     }

@@ -10,6 +10,7 @@ public interface BusMapper {
     // 根据license查询车辆信息
     List<Bus> findBylicense(String license);
 
+    List<Bus> findBypage(int page);
 
     // 新增车辆信息
     int insert(Bus Bus);
@@ -22,5 +23,5 @@ public interface BusMapper {
 
     int isExist(String license);
 
-    int total_findBylicense(String license);
+    int total_bus();
 }

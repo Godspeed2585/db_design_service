@@ -8,6 +8,11 @@
         SELECT * FROM "TicketManagement".bus WHERE license = #{license}
     </select>
 
+    <!-- 根据page查询总bus信息 -->
+    <select id="findBypage" resultType="Bus">
+        SELECT * FROM "TicketManagement".bus LIMIT 10 OFFSET #{page}
+    </select>
+
     <!-- 新增bus信息 -->
     <insert id="insert" parameterType="Bus">
         INSERT INTO "TicketManagement".bus (license, "totalFirst", "totalSecond")
@@ -31,8 +36,8 @@
     </select>
 
     <!-- 根据license查询bus所得的表的项目总数 -->
-    <select id="total_findBylicense" parameterType="String" resultType="int">
-        SELECT COUNT(*) FROM "TicketManagement".bus WHERE license = #{license}
+    <select id="total_bus" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".bus
     </select>
 
 </mapper>
