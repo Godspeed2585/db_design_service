@@ -23,9 +23,9 @@ public class ClassAndRouteServiceImpl implements ClassAndRouteService {
 
     @Override
     public List<Class> getClassByBE(String begin, String end, LocalDate date) {
-        List<Integer> routeIdList = stopoverStationsMapper.getRouteIdByBE(begin,end);
+        List<String> routeIdList = stopoverStationsMapper.getRouteIdByBE(begin,end);
         List<Class> classList =new ArrayList<>();
-        for (Integer routeId : routeIdList) {
+        for (String routeId : routeIdList) {
             classList.addAll(classMapper.getClassByRouteIdDate(routeId,date.atStartOfDay(),date.atStartOfDay().plusDays(1)));
         }
         return classList;

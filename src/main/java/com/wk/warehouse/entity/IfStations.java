@@ -4,7 +4,7 @@ public class IfStations {
     private String initialStation;
     private String finalStation;
     private float totalLength;
-    private int routeId;
+    private String routeId;
 
     // get方法获取initialStation属性的值
     public String getInitialStation() {
@@ -37,12 +37,12 @@ public class IfStations {
     }
 
     // get方法获取routeId属性的值
-    public int getRouteId() {
+    public String getRouteId() {
         return routeId;
     }
 
     // set方法设置routeId属性的值
-    public void setRouteId(int routeId) {
+    public void setRouteId(String routeId) {
         this.routeId = routeId;
     }
 }

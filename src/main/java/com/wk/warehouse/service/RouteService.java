@@ -12,16 +12,16 @@ import com.wk.warehouse.entity.StopoverStations;
 public interface RouteService {
 
     /** 根据routeId和出发站begin和目的站查找路线*/
-    public List<StopoverStations> getRoute(String begin,String end,int routeId);
+    public List<StopoverStations> getRoute(String begin,String end,String routeId);
 
     /** 删除路线 */
-    public int deleteRoute(int routeId);
+    public int deleteRoute(String routeId);
 
     /** 更新路线,即改途径，也改首发站*/
     public int updateRoute(List<StopoverStations> stopoverStationsList,IfStations ifstations);
 
     /**判断路线是否存在 */
-    public boolean isExist(int routeID);
+    public boolean isExist(String routeID);
     /** 添加一条新路线 */
     public int addRoute(List<StopoverStations> stopoverStationsList,IfStations ifstations);
 }

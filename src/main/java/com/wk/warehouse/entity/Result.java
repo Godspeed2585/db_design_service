@@ -9,7 +9,7 @@ public class Result {
     /**
      * 404 Not Found：表示服务器找不到请求的资源。
      */
-    public static final int CODE_NOT_FIND = 200;
+    public static final int CODE_NOT_FIND = 404;
     /**
      * 业务错误
      */

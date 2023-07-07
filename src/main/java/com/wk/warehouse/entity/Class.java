@@ -6,7 +6,7 @@ public class Class {
     private String license;
     private int jobId;
     private LocalDateTime times;
-    private int routeId;
+    private String routeId;
     private float basicPrice;
     private float firstWeight;
     private float secondweight;
@@ -37,11 +37,11 @@ public class Class {
         this.times = times;
     }
 
-    public int getRouteId() {
+    public String getRouteId() {
         return routeId;
     }
 
-    public void setRouteId(int routeId) {
+    public void setRouteId(String routeId) {
         this.routeId = routeId;
     }
 

@@ -9,9 +9,9 @@ public interface StopoverStationsService {
 
     public int update(StopoverStations stopoverStations);
 
-    public int delete(int id, String nb);
+    public int delete(String id, String nb);
 
-    public List<StopoverStations> findByrouteId(int routeId);
+    public List<StopoverStations> findByrouteId(String routeId);
 
     public List<StopoverStations> findAll();
 }

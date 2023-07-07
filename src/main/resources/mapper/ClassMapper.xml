@@ -5,31 +5,31 @@
 
     <!-- 根据wagonId查询信息 -->
     <select id="findByWagonId" resultType="com.wk.warehouse.entity.Class">
-        SELECT * FROM "TicketManagement".class WHERE wagonId = #{wagonId}
+        SELECT * FROM "TicketManagement".class WHERE "wagonId" = #{wagonId}
     </select>
 
     <!-- 新增信息 -->
     <insert id="insert" parameterType="com.wk.warehouse.entity.Class">
-        INSERT INTO "TicketManagement".class (license, times, routeId, basicPrice, firstWeight, secondWeight, discountWeight, wagonId)
-        VALUES (#{license}, #{times}, #{routeId}, #{basicPrice}, #{firstWeight}, #{secondWeight}, #{discountWeight}, #{wagonId})
+        INSERT INTO "TicketManagement".class ("wagonId",license,"jobId", times, "routeId", "basicPrice", "firstWeight", "secondWeight", "discountWeight")
+        VALUES (#{wagonId},#{license},#{jobId}, #{times}, #{routeId}, #{basicPrice}, #{firstWeight}, #{secondWeight}, #{discountWeight})
     </insert>
 
     <!-- 更新信息 -->
     <update id="update" parameterType="com.wk.warehouse.entity.Class">
-        UPDATE "TicketManagement".class SET license = #{license}, times = #{times}, routeId = #{routeId}, basicPrice = #{basicPrice},
-        firstWeight = #{firstWeight}, secondWeight = #{secondWeight}, discountWeight = #{discountWeight},
-        wagonId = #{wagonId}
-        WHERE jobId = #{jobId}
+        UPDATE "TicketManagement".class SET license = #{license}, times = #{times}, "routeId" = #{routeId}, "basicPrice" = #{basicPrice},
+        "firstWeight" = #{firstWeight}, "secondWeight" = #{secondWeight}, "discountWeight" = #{discountWeight},
+        "wagonId" = #{wagonId}
+        WHERE "jobId" = #{jobId}
     </update>
 
     <!-- 删除信息 -->
-    <delete id="delete" parameterType="int">
-        DELETE FROM "TicketManagement".class WHERE jobId = #{jobId}
+    <delete id="delete" parameterType="String">
+        DELETE FROM "TicketManagement".class WHERE "wagonId" = #{wagonId}
     </delete>
 
     <select id="getClassByRouteIdDate" resultType="com.wk.warehouse.entity.Class">
         SELECT * FROM "TicketManagement".class
-        WHERE routeId = #{routeId}
+        WHERE "routeId" = #{routeId}
             AND times &gt;= #{startDate}
             AND times &lt; #{endDate}
     </select>

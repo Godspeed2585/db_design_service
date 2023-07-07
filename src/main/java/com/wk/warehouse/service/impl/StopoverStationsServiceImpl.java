@@ -26,12 +26,12 @@ public class StopoverStationsServiceImpl implements StopoverStationsService {
     }
 
     @Override
-    public int delete(int id, String nb) {
+    public int delete(String id, String nb) {
         return stopoverStationsMapper.delete(id, nb);
     }
 
     @Override
-    public List< StopoverStations> findByrouteId(int routeId) {
+    public List< StopoverStations> findByrouteId(String routeId) {
         return stopoverStationsMapper.findByrouteId(routeId);
     }
 

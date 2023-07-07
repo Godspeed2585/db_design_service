@@ -4,7 +4,7 @@ import com.wk.warehouse.entity.IfStations;
 
 public interface IfStationsMapper {
     // 根据routeId查询车站信息
-    IfStations findByRouteId(int routeId);
+    IfStations findByRouteId(String routeId);
 
     // // 根据initialStation和finalStation查询车站信息
     // List<IfStations> findByStations(@Param("initialStation") String initialStation, @Param("finalStation") String finalStation);
@@ -16,5 +16,5 @@ public interface IfStationsMapper {
     int update(IfStations ifStations);
 
     // 删除车站信息
-    int delete(int routeId);
+    int delete(String routeId);
 }

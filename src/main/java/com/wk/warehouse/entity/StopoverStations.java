@@ -1,13 +1,13 @@
 package com.wk.warehouse.entity;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class StopoverStations {
     private String stationName;
-    private LocalDate arriveTime;
-    private LocalDate departureTime;
+    private LocalTime arriveTime;
+    private LocalTime departureTime;
     private float length;
-    private int routeId;
+    private String routeId;
     private int number;
 
     public String getStationName() {
@@ -18,19 +18,19 @@ public class StopoverStations {
         this.stationName = stationName;
     }
 
-    public LocalDate getArriveTime() {
+    public LocalTime getArriveTime() {
         return arriveTime;
     }
 
-    public void setArriveTime(LocalDate arriveTime) {
+    public void setArriveTime(LocalTime arriveTime) {
         this.arriveTime = arriveTime;
     }
 
-    public LocalDate getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalDate departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -42,11 +42,11 @@ public class StopoverStations {
         this.length = length;
     }
 
-    public int getRouteId() {
+    public String getRouteId() {
         return routeId;
     }
 
-    public void setRouteId(int routeId) {
+    public void setRouteId(String routeId) {
         this.routeId = routeId;
     }
     public int getnumber() {

@@ -14,7 +14,7 @@ public class IfStationsServiceImpl implements IfStationsService{
     private IfStationsMapper ifStationsMapper;
 
     @Override
-    public IfStations findByRouteId(int routeId) {
+    public IfStations findByRouteId(String routeId) {
         return ifStationsMapper.findByRouteId(routeId);
     }
 
@@ -29,7 +29,7 @@ public class IfStationsServiceImpl implements IfStationsService{
     }
 
     @Override
-    public int delete(int routeId) {
+    public int delete(String routeId) {
         return ifStationsMapper.delete(routeId);
     }
 }

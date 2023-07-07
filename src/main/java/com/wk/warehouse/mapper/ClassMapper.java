@@ -19,6 +19,6 @@ public interface ClassMapper {
     // 删除信息
     int delete(String wagonId);
 
-    List<Class> getClassByRouteIdDate(@Param("routeId") int routeId, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    List<Class> getClassByRouteIdDate(@Param("routeId") String routeId, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
 }

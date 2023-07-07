@@ -4,17 +4,17 @@
 <mapper namespace="com.wk.warehouse.mapper.StopoverStationsMapper">
 
     <insert id="insert" parameterType="StopoverStations">
-        INSERT INTO "TicketManagement"."stopoverStations" ("stationName", "arriveTime", "departureTime", length, "routeId", number)
-        VALUES (#{stationName}, #{arriveTime}, #{departureTime}, #{length}, #{routeId}, #{number})
+        INSERT INTO "TicketManagement"."stopoverStations" ("routeId", number, "stationName", "arriveTime", "departureTime", length)
+        VALUES (#{routeId}, #{number}, #{stationName}, #{arriveTime}, #{departureTime}, #{length})
     </insert>
 
     <update id="update" parameterType="StopoverStations">
         UPDATE "TicketManagement"."stopoverStations" SET "stationName" = #{stationName}, "arriveTime" = #{arriveTime},
-        "departureTime" = #{departureTime}, length = #{length} WHERE "routeId" = #{routeId}
+        "departureTime" = #{departureTime}, length = #{length} WHERE "routeId" = #{routeId} AND "number" = #{number}
     </update>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{userId} AND number = #{number}
+    <delete id="delete" parameterType="String">
+        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId} AND number = #{number}
     </delete>
 
     <select id="findByrouteId" resultType="StopoverStations">
@@ -25,11 +25,11 @@
         SELECT * FROM "TicketManagement"."stopoverStations"
     </select>
 
-    <delete id="deleteByRouteId" parameterType="int">
-        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{userId}
+    <delete id="deleteByRouteId" parameterType="String">
+        DELETE FROM "TicketManagement"."stopoverStations" WHERE "routeId" = #{routeId}
     </delete>
 
-    <select id="getRouteIdByBE" resultType="StopoverStations">
+    <select id="getRouteIdByBE" resultType="String">
         SELECT "routeId"
         FROM "TicketManagement"."stopoverStations"
         WHERE "stationName" = #{begin}

@@ -9,13 +9,13 @@ public interface StopoverStationsMapper {
 
     int update(StopoverStations stopoverStations);
 
-    int delete(@Param("userId") int id, @Param("number") String nb);
+    int delete(@Param("routeId") String id, @Param("number") String nb);
 
-    List<StopoverStations> findByrouteId(int routeId);
+    List<StopoverStations> findByrouteId(String routeId);
 
     List<StopoverStations> findAll();
 
-    int deleteByRouteId(@Param("userId") int id);
+    int deleteByRouteId(@Param("routeId") String id);
 
-    List<Integer> getRouteIdByBE(@Param("begin") String begin, @Param("end") String end);
+    List<String> getRouteIdByBE(@Param("begin") String begin, @Param("end") String end);
 }
