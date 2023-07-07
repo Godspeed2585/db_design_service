@@ -1,42 +1,42 @@
 package com.wk.warehouse.service;
 
-import com.wk.warehouse.entity.PassengerReturnList;
-import com.wk.warehouse.entity.PassengerInfo;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
+import com.wk.warehouse.entity.Passenger;
 
-import javax.annotation.Resource;
 import java.util.List;
 
-@Service
 public interface PassengerService {
+    /**
+     * 查询某用户名下的所有乘客(使用phoneNumber)
+     */
+    public List<Passenger> findByPphoneNumber(String passengerPhoneNumber);
 
     /**
-     * 查询所有乘客信息
+     * 使用idCard查询乘客的信息
      */
-    public List<PassengerInfo> selectAllPassenger();
-
+    public Passenger findByidCard(String idCard);
 
     /**
-     * 查询某用户下的所有乘客信息(phoneNumber为User表的主键)
+     * 查询所有乘客的信息
      */
-    public List<PassengerInfo> selectPassengerInfo(String phoneNumber);
-
+    public List<Passenger> selectAll();
 
     /**
-     * 查询某用户下的所有乘客信息(phoneNumber为User表的主键)
+     * 添加乘客
      */
-    public List<PassengerInfo> selectPassengerInfoByidCard(String idCard);
+    public int insert(Passenger passenger);
 
-    
     /**
-     * 插入新的乘客信息
+     *修改乘客信息
      */
-   public boolean insertPassenger(String passengerName, String passengerPhoneNumber, int age, String idCard);
+    public int update(Passenger passenger);
 
-    
-     /**
-     * 删除某一乘客信息
+    /**
+     * 删除乘客信息
      */
-    public void deletePassenger(String idCard);
+    public int delete(String idCard);
+
+    /**
+     * 查询乘客是否存在
+     */
+    public int isExist(String idCard);
 }

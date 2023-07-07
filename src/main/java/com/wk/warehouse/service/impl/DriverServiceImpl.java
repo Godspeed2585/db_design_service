@@ -1,113 +1,65 @@
 package com.wk.warehouse.service.impl;
-import com.wk.warehouse.entity.DriverInfo;
-import com.wk.warehouse.entity.DriverInfoReturnData;
-import com.wk.warehouse.entity.DriverReturnList;
+
+import com.wk.warehouse.entity.Driver;
 import com.wk.warehouse.mapper.DriverMapper;
-import com.wk.warehouse.mapper.UserMapper;
-import org.apache.ibatis.annotations.Param;
+import com.wk.warehouse.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.sql.Date;
+
 import java.util.List;
+
+/**
+ * service实现类
+ */
 @Service
-public class DriverServiceImpl {
+public class DriverServiceImpl  implements DriverService {
 
+    // 注入Mapper对象
     @Autowired
-	private DriverMapper driverMapper;
-
+    private DriverMapper DriverMapper;
 
     /**
-     *
-     * 查询所有司机信息
-     * @return
+     * 用jobId查询司机的信息
      */
-    public List<DriverInfo> selectAllDriver() {
-        return driverMapper.findAllDriver();
+    @Override
+    public Driver findByjobId(int jobId){
+        return DriverMapper.findByjobId(jobId);
     }
 
-
     /**
-     *
-     * 查询某一司机d信息(jobId为主键)
-     * @param jobId
-     * @return
+     * 查询所有司机的信息
      */
-    public DriverInfo selectDriverInfo(int jobId)
+    public List<Driver> selectAll()
     {
-        return driverMapper.findDriverInfo(jobId);
+        return DriverMapper.selectAll();
     }
-
 
     /**
-     * 插入新的司机信息
-     * @param driverName
-     * @param entryTime
-     * @param gender
-     * @param jobId
-     * @return
+     * 加入新司机
      */
-   public boolean insertDriver(String driverName, Date entryTime, String gender, int jobId)
-    {
-        driverMapper.insertDriver(driverName, entryTime, gender, jobId);//mapper和service层各自的insertDriver函数类型不同
-        return true;
+    @Override
+    public int insert(Driver driver){
+        return DriverMapper.insert(driver);
     }
 
+    /**
+     *修改司机信息
+     */
+    public int update(Driver driver){
+        return DriverMapper.update(driver);
+    }
     
     /**
-     * 修改司机相关信息
-     * @param driverName
-     * @param entryTime
-     * @param gender
-     * @param jobId
+     * 删除司机
      */
-    public void updateDriver(String driverName, Date entryTime, String gender, int jobId)
-    {
-        driverMapper.uptateDriver(driverName, entryTime, gender, jobId);
+    public int delete(int jobId){
+        return DriverMapper.delete(jobId);
     }
 
-
     /**
-     * 修改司机姓名
-     * @param driverName
-     * @param jobId
+     * 判断该司机是否已存在
      */
-    public void updateDriverName(String driverName, int jobId)
-    {
-        driverMapper.uptateDriverName(driverName, jobId);
-    }
-
-    
-    /**
-     * 修改司机性别
-     * @param gender
-     * @param jobId
-     */
-    public void updateDriverGender(String gender, int jobId)
-    {
-        driverMapper.uptateDriverGender(gender, jobId);
-    }
-
-
-    /**
-     * 修改司机入职时间
-     * @param entryTime
-     * @param jobId
-     */
-    public void updateDriverTime(Date entryTime, int jobId)
-    {
-        driverMapper.uptateDriverTime(entryTime, jobId);
-    }
-
-
-    /**
-     *
-     * 删除某司机的信息
-     * @param jobId
-     * @return
-     */
-    public void deleteDriver(int jobId)
-    {
-        driverMapper.deleteDriver(jobId);
+    public int isExist(int jobId){
+        return DriverMapper.isExist(jobId);
     }
 }

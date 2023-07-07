@@ -1,42 +1,44 @@
 package com.wk.warehouse.mapper;
 
-import com.wk.warehouse.entity.PassengerInfo;
-import com.wk.warehouse.entity.PassengerInfoReturnData;
-import com.wk.warehouse.entity.PassengerReturnList;
+import com.wk.warehouse.entity.Passenger;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
 public interface PassengerMapper {
-    /**
-     * 查询所有乘客的信息(仅管理员/超管可用)
-     */
-    public List<PassengerInfo> findAllPassenger();
-
 
     /**
-     * 查询某用户名下的所有乘客的信息(phoneNumber为user表的主键,所以使用passengerPhoneNumber进行查询)
+     * 查询某用户名下的所有乘客(使用PphoneNumber查询)
      */
-    public List<PassengerInfo> findPassengerInfo(@Param("passengerPhoneNumber") String passengerPhoneNumber);
-
-
-    /**
-     * 使用idCard查询乘客的信息(仅管理员/超管可用)
-     */
-    public List<PassengerInfo> findPassengerInfoByidCard(@Param("idCard")String idCard);
+    public List<Passenger> findByPphoneNumber(String passengerPhoneNumber);
 
     /**
-     * 添加乘客信息
+     * 使用idCard查询乘客的信息
      */
-    public void insertPassenger(@Param("passengerName")String passengerName, @Param("passengerPhoneNumber")String passengerPhoneNumber,  @Param("int")int age,  @Param("idCard")String idCard);
+    public Passenger findByidCard(String idCard);
+
+    /**
+     * 查询所有乘客的信息
+     */
+    public List<Passenger> selectAll();
 
 
     /**
-     * 删除乘客信息(idCard为passenger表的主键)
+     * 添加乘客
      */
-    public void deletePassenger(@Param("idCard")String idCard);
-
+    public int insert(Passenger passenger);
 
     /**
-     *修改乘客信息(其实没什么用,因为phoneNumber必须对应user里的phoneNumber,idCard不能乱改,passengerName与age一般没有更改的需求)
+     *修改乘客信息
      */
-    public void uptatePassenger(String passengerName, String passengerPhoneNumber, int age, String idCard);
+    public int update(Passenger passenger);
+
+    /**
+     * 删除乘客信息
+     */
+    public int delete(String idCard);
+
+    /**
+     * 查询乘客是否存在
+     */
+    public int isExist(String idCard);
+
 }

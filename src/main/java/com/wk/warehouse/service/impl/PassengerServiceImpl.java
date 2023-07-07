@@ -1,79 +1,75 @@
 package com.wk.warehouse.service.impl;
-import com.wk.warehouse.entity.PassengerReturnList;
+
+import com.wk.warehouse.entity.Passenger;
 import com.wk.warehouse.mapper.PassengerMapper;
-import com.wk.warehouse.mapper.UserMapper;
-import com.wk.warehouse.entity.PassengerInfo;
-import org.apache.ibatis.annotations.Param;
+import com.wk.warehouse.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
+
 import java.util.List;
+
+/**
+ * service实现类
+ */
 @Service
-public class PassengerServiceImpl {
+public class PassengerServiceImpl implements PassengerService {
 
+    // 注入Mapper对象
     @Autowired
-	private PassengerMapper passengerMapper;
-
-
-    /**
-     *
-     * 查询所有乘客信息
-     * @return
-     */
-    public List<PassengerInfo> selectAllPassenger() {
-        return passengerMapper.findAllPassenger();
-    }
-
+    private PassengerMapper PassengerMapper;
 
     /**
-     *
-     * 查询某用户下的所有乘客信息(phoneNumber为User表的主键)
-     * @param phoneNumber
-     * @return
+     * 查询某用户名下的所有乘客(使用phoneNumber)
      */
-    public List<PassengerInfo> selectPassengerInfo(String phoneNumber)
-    {
-        return passengerMapper.findPassengerInfo(phoneNumber);
+    @Override
+    public List<Passenger> findByPphoneNumber(String passengerPhoneNumber){
+        return PassengerMapper.findByPphoneNumber(passengerPhoneNumber);
     }
-
 
     /**
-     *
-     * 查询某用户下的所有乘客信息(phoneNumber为User表的主键)
-     * @param idCard
-     * @return
+     * 使用idCard查询乘客的信息
      */
-    public List<PassengerInfo> selectPassengerInfoByidCard(String idCard)
-    {
-        return passengerMapper.findPassengerInfoByidCard(idCard);
+    @Override
+    public Passenger findByidCard(String idCard){
+        return PassengerMapper.findByidCard(idCard);
     }
-
 
     /**
-     *
-     * 插入新的乘客信息
-     * @param passengerName
-     * @param passengerPhoneNumber
-     * @param age
-     * @param idCard
-     * @return
+     * 查询所有乘客的信息
      */
-   public boolean insertPassenger(String passengerName, String passengerPhoneNumber, int age, String idCard)
-    {
-        passengerMapper.insertPassenger(passengerName, passengerPhoneNumber, age, idCard);
-        return true;
+    public List<Passenger> selectAll(){
+        return PassengerMapper.selectAll();
     }
 
-    //passenger表的属性一般不做改动
-
-     /**
-     *
-     * 删除某一乘客信息
-     * @param idCard
-     * @return
+    /**
+     * 添加乘客
      */
-    public void deletePassenger(String idCard)
-    {
-        passengerMapper.deletePassenger(idCard);
+    @Override
+    public int insert(Passenger passenger){
+        return PassengerMapper.insert(passenger);
+    }
+
+    /**
+     *修改乘客信息(其实这个部分没什么用)
+     */
+    @Override
+    public int update(Passenger passenger){
+        return PassengerMapper.update(passenger);
+    }
+
+    /**
+     * 删除乘客信息
+     */
+    @Override
+    public int delete(String idCard){
+        return PassengerMapper.delete(idCard);
+    }
+
+    /**
+     * 查询乘客是否存在
+     */
+    @Override
+    public int isExist(String idCard){
+        return PassengerMapper.isExist(idCard);
     }
 }

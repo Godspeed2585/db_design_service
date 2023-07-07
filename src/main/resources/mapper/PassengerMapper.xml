@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wk.warehouse.mapper.PassengerMapper">
 
-<!-- 查询所有乘客信息 -->
-	<select id="findAllPassenger" resultType="List<PassengerInfo>">
-		select * from "TicketManagement".passenger
-	</select>
+    <!-- 根据phoneNumber查询某用户的所有乘客信息 -->
+    <select id="findByPphoneNumber" parameterType="String" resultType="Passenger">
+        SELECT * FROM "TicketManagement".passenger WHERE "passengerPhoneNumber" = #{passengerPhoneNumber}
+    </select>
 
-<!-- 查询某用户名下的所有乘客信息 -->
-	<select id="findPassengerInfo" resultType="List<PassengerInfo>">
-		selcet * from "TicketManagement".passenger where passengerPhoneNumber = #{passengerPhoneNumber}
-	</select>
+    <!-- 根据idCard查询乘客信息 -->
+    <select id="findByidCard" parameterType="String" resultType="Passenger">
+        SELECT * FROM "TicketManagement".passenger WHERE "idCard" = #{idCard}
+    </select>
 
-<!-- 使用idCard查询乘客信息 -->
-	<select id="findPassengerInfoByidCard" resultType="List<PassengerInfo>">
-		selcet * from "TicketManagement".passenger where idCard = #{idCard}
-	</select>
+    <!-- 查询所有乘客信息 -->
+    <select id="selectAll" resultType="Passenger">
+        SELECT * FROM "TicketManagement".passenger
+    </select>
 
-<!-- 添加乘客信息 -->
-	<insert id="insertPassenger" >
-		insert into "TicketManagement".passenger (passengerName, passengerPhoneNumber, age, idCard) values ( #{passengerName}, #{passengerPhoneNumber}, #{age}, #{idCard})
-	</insert>
+    <!-- 新增乘客信息 -->
+    <insert id="insert" parameterType="Passenger">
+        INSERT INTO "TicketManagement".passenger ("passengerName", "passengerPhoneNumber", age, "idCard")
+        VALUES (#{passengerName}, #{passengerPhoneNumber}, #{age}, #{idCard})
+    </insert>
 
-<!-- 删除乘客信息 -->
-	<delete id="deletePassenger" >
-		delete from "TicketManagement".passenger where idCard = #{ idCard }
+    <!-- 更新乘客信息 -->
+    <update id="update" parameterType="Passenger">
+        UPDATE "TicketManagement".driver SET "passengerName" = #{passengerName}, age = #{age}
+        WHERE "idCard" = #{idCard}
+    </update>
+
+    <!-- 删除乘客信息 -->
+    <delete id="delete" parameterType="String">
+        DELETE FROM "TicketManagement".passenger WHERE "idCard" = #{idCard}
     </delete>
-    
+
+    <!-- 查询乘客是否存在 -->
+    <select id="isExist" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM "TicketManagement".passenger WHERE "idCard" = #{idCard} LIMIT 1
+    </select>
+
 </mapper>

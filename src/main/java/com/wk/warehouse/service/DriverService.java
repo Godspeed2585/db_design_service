@@ -1,57 +1,38 @@
 package com.wk.warehouse.service;
 
-import com.wk.warehouse.entity.DriverInfo;
-import com.wk.warehouse.entity.DriverInfoReturnData;
-import com.wk.warehouse.entity.DriverReturnList;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.sql.Date;
+import com.wk.warehouse.entity.Driver;
+
 import java.util.List;
 
 public interface DriverService {
+
+    /**
+     * 用jobId查询司机的信息
+     */
+    public Driver findByjobId(int jobId);
+
+    /**
+     * 查询所有司机的信息
+     */
+    public List<Driver> selectAll();
+
+    /**
+     * 加入新司机
+     */
+    public int insert(Driver driver);
+
+    /**
+     *修改司机信息
+     */
+    public int update(Driver driver);
     
     /**
-     * 查询所有司机信息
+     * 删除司机
      */
-    public List<DriverInfo> selectAllDriver();
-
+    public int delete(int jobId);
 
     /**
-     * 查询某一司机d信息(jobId为主键)
+     * 判断该司机是否已存在
      */
-    public DriverInfo selectDriverInfo(int jobId);
-
-
-    /**
-     * 插入新的司机信息
-     */
-   public boolean insertDriver(String driverName, Date entryTime, String gender, int jobId);
-
-    
-    /**
-     * 修改司机相关信息
-     */
-    public void updateDriver(String driverName, Date entryTime, String gender, int jobId);
-
-    /**
-     * 修改司机姓名
-     */
-    public void updateDriverName(String driverName, int jobId);
-
-    /**
-     * 修改司机性别
-     */
-    public void updateDriverGender(String gender, int jobId);
-
-    /**
-     * 修改司机入职时间
-     */
-    public void updateDriverTime( Date entryTime, int jobId);
-
-    /**
-     * 删除某司机的信息
-     */
-    public void deleteDriver(int jobId);
+    public int isExist(int jobId);
 }

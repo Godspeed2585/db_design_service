@@ -9,22 +9,22 @@
     </select>
 
     <insert id="insert" parameterType="Station">
-        INSERT INTO "TicketManagement".station ("stationName")
+        INSERT INTO "TicketManagement".station (stationName)
         VALUES (#{stationName})
     </insert>
 
     <delete id="delete" parameterType="String">
-        DELETE FROM station WHERE "stationName" = #{stationName}
+        DELETE FROM station WHERE stationName = #{stationName}
     </delete>
 
     <update id="update" parameterType="Station">
         UPDATE station SET
-        "stationName" = #{stationName}
-        WHERE "stationName" = #{stationName}
+        stationName = #{stationName}
+        WHERE stationName = #{stationName}
     </update>
 
     <select id="selectByName" parameterType="String" resultType="Station">
-        SELECT * FROM station WHERE "stationName" = #{stationName}
+        SELECT * FROM station WHERE stationName = #{stationName}
     </select>
 
 

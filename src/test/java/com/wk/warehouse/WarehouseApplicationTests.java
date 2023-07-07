@@ -9,6 +9,13 @@ import com.wk.warehouse.entity.Bus;
 import com.wk.warehouse.mapper.BusMapper;
 import com.wk.warehouse.entity.Order;
 import com.wk.warehouse.mapper.OrderMapper;
+
+import com.wk.warehouse.entity.Driver;
+import com.wk.warehouse.mapper.DriverMapper;
+import com.wk.warehouse.entity.Passenger;
+import com.wk.warehouse.mapper.PassengerMapper;
+import com.wk.warehouse.entity.User;
+import com.wk.warehouse.mapper.UserMapper;
 import java.util.List;
 
 @SpringBootTest
@@ -20,6 +27,14 @@ class WarehouseApplicationTests {
     private BusMapper busMapper;
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private DriverMapper driverMapper;
+    @Autowired
+    private PassengerMapper passengerMapper;
+    @Autowired
+    private UserMapper userMapper;
+
 
     @Test // 每一个测试方法上都需要添加@Test注解
     public void testHello(){
@@ -49,5 +64,22 @@ class WarehouseApplicationTests {
     public void testOrder() {
         List<Order> c=orderMapper.findByorderId(1);
         System.out.println(c);
+    }
+    @Test
+    public void testDriver() {
+        Driver d= driverMapper.findByjobId(1);
+        System.out.println(d);
+    }
+
+    @Test
+    public void testPassenger() {
+        Passenger e= passengerMapper.findByidCard("1");
+        System.out.println(e);
+    }
+    
+    @Test
+    public void testUser() {
+        User f= userMapper.findByphoneNumber("1");
+        System.out.println(f);
     }
 }

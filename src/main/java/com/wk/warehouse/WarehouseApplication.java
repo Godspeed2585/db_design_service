@@ -9,7 +9,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableOpenApi
 @SpringBootApplication
 // mapper扫描会给所有该包下的mapper接口生成一个类型首字母小写的对象
-@MapperScan("com.wk.warehouse.mapper")
+@MapperScan({"com.wk.warehouse.mapper", "com.wk.warehouse.util"})
 
 public class WarehouseApplication {
 
